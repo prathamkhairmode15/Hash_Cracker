@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Cracker | Cyber Astra</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0b0d14;
+            color: #ffffff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #0b0d14;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            border-bottom: 1px solid #1a1d3a;
+        }
+
+        header h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav > a,
+        .dropdown-btn {
+            margin-left: 30px;
+            font-size: 14px;
+            color: #cfd2ff;
+            cursor: pointer;
+        }
+
+        nav a:hover,
+        .dropdown-btn:hover {
+            color: #ffffff;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 25px;
+            background: #151936;
+            border-radius: 6px;
+            min-width: 180px;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 15px;
+            font-size: 13px;
+        }
+
+        .dropdown-content a:hover {
+            background: #1f2458;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* ---------------- HERO ---------------- */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content span {
+            color: #6c7cff;
+        }
+
+        .hero-content p {
+            color: #b5b8ff;
+            margin-bottom: 35px;
+        }
+
+        .hero-content button {
+            padding: 14px 32px;
+            background: #6c7cff;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .hero-content button:hover {
+            background: #5867e0;
+        }
+        /* ---------------- LEARNING ---------------- */
+        .learning {
+            padding: 80px 60px;
+        }
+
+        .learning h3 {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+        }
+
+        .video-card {
+            background: #151936;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-thumb {
+            height: 250px;;
+            width: 100%;
+            background: #22265a;
+            display: flex;
+            object-fit: contain;
+            justify-content: center;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .video-card p {
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        /* ---------------- TOOLS ---------------- */
+        .tools {
+            padding: 100px 60px;
+            background-color: #0f1220;
+        }
+
+        .tools h3 {
+            font-size: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            background: #151936;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .tool-card h4 {
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            color: #b5b8ff;
+            font-size: 14px;
+        }
+
+        /* ---------------- DISCLAIMER ---------------- */
+        .disclaimer {
+            padding: 100px 80px;
+            background: linear-gradient(135deg, #151936, #0b0d14);
+            text-align: center;
+        }
+
+        .disclaimer h3 {
+            font-size: 34px;
+            margin-bottom: 25px;
+            color: #ff6b6b;
+        }
+
+        .disclaimer p {
+            max-width: 900px;
+            margin: auto;
+            font-size: 16px;
+            color: #d1d3ff;
+            line-height: 1.8;
+        }
+
+        .disclaimer strong {
+            color: #ffffff;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+        footer {
+            padding: 25px;
+            background: #0f1220;
+            text-align: center;
+            font-size: 13px;
+            color: #9aa0ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <h1>MODULO</h1>
+        <nav>
+            <a href="#">Home</a>
+
+            <div class="dropdown">
+                <span class="dropdown-btn">Tools ▾</span>
+                <div class="dropdown-content">
+                    <a href="pages/hash-generator.html">Hash Generator</a>
+                    <a href="pages/dictionary-attack.html">Dictionary Attack</a>
+                </div>
+            </div>
+
+            <a href="#tools">Explore</a>
+            <a href="#disclaimer">Disclaimer</a>
+            <a href="#learning">Learning</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Understand <span>Hashes</span><br>Before You Break Them</h2>
+            <p>
+                <span>MODULO</span> is an educational cybersecurity platform
+                designed to teach hashing and password attack fundamentals.
+            </p>
+            <p>Why <span>MODULO</span> ? <br>Modulo operator is fundamental of hash function. Modulo operator is used to solve the hashing problem.</p>
+            <a href="#tools">
+                <button>Explore Tools</button>
+            </a>
+        </div>
+    </section>
+    <!-- LEARNING VIDEOS -->
+<section class="learning" id="learning">
+    <h3>Learn Before You Crack</h3>
+
+    <div class="video-grid">
+        <!-- Video 1 -->
+        <a href="https://www.youtube.com/watch?v=pMM9cIAFAug&t=32s" target="_blank" class="video-card">
+            <div class="video-thumb">
+                <img src="https://i.ytimg.com/vi/pMM9cIAFAug/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBfUQ31crjFpgpEfHj6CWE5dAwVmg" alt="What is Hashing">
+            </div>
+            <p>What is Hashing? | Cryptography Basics</p>
+        </a>
+
+        <!-- Video 2 -->
+        <a href="https://www.youtube.com/watch?v=8ZtInClXe1Q" target="_blank" class="video-card">
+            <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/8ZtInClXe1Q/hqdefault.jpg" alt="Dictionary Attack">
+            </div>
+            <p>Dictionary Attacks Explained</p>
+        </a>
+
+        <!-- Video 3 -->
+        <a href="https://www.youtube.com/watch?v=yoMOAIzBSpY" target="_blank" class="video-card">
+            <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/yoMOAIzBSpY/hqdefault.jpg" alt="Password Security">
+            </div>
+            <p>Password Security Best Practices</p>
+        </a>
+         <!-- Video 4 -->
+        <a href="https://www.youtube.com/watch?v=hbZcf00pYqk" target="_blank" class="video-card">
+            <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/hbZcf00pYqk/hqdefault.jpg" alt="Password Security">
+            </div>
+            <p>MD 5 Hashing Algorithm</p>
+        </a>
+        <!-- Video 5 -->
+        <a href="https://www.youtube.com/watch?v=DMtFhACPnTY&t=95s" target="_blank" class="video-card">
+            <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/DMtFhACPnTY/hqdefault.jpg" alt="Password Security">
+            </div>
+            <p>SHA 1 Hashing Algorithm</p>
+        </a>
+        <!-- Video 6 -->
+        <a href="https://www.youtube.com/watch?v=orIgy2MjqrA" target="_blank" class="video-card">
+            <div class="video-thumb">
+                <img src="https://img.youtube.com/vi/orIgy2MjqrA/hqdefault.jpg" alt="Password Security">
+            </div>
+            <p>Password Security Best Practices</p>
+        </a>
+    </div>
+</section>
+
+
+    <!-- TOOLS -->
+    <section class="tools" id="tools">
+        <h3>Core Tools</h3>
+        <div class="tool-grid">
+            <div class="tool-card">
+                <h4><a href="pages/hash-generator.html">Hash Generator</a></h4>
+                <p>Generate MD5, SHA-1, and SHA-256 hashes for learning and testing.</p>
+            </div>
+            <div class="tool-card">
+                <h4><a href="pages/dictionary-attack.html">Dictionary Attack</a></h4>
+                <p>Understand how weak passwords are cracked using wordlists.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <section class="disclaimer" id="disclaimer">
+        <h3>Educational Disclaimer</h3>
+        <p>
+            This project is created <strong>strictly for educational and academic purposes</strong>.
+            It is intended to help students understand how cryptographic hashes work and why
+            weak passwords pose serious security risks.
+            <br><br>
+            <strong>The developer holds no responsibility</strong> for any misuse, illegal activity,
+            or unauthorized testing performed using this project. Users are strongly advised
+            to apply this knowledge ethically and responsibly.
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        © Cyber Astra | Learning Cybersecurity the Right Way
+    </footer>
+
+</body>
+</html>
