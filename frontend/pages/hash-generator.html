@@ -10,6 +10,93 @@
     <script src="../js/hashGenerator.js"></script>
 
     <style>
+        /* -------- NAVBAR -------- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #0b0d14;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    border-bottom: 1px solid #1a1d3a;
+}
+
+.nav-brand {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Links */
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    position: relative;
+    margin-left: 30px;
+    font-size: 14px;
+    color: #cfd2ff;
+    cursor: pointer;
+    padding-bottom: 6px;
+}
+
+/* Underline animation */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: #6c7cff;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #ffffff;
+}
+
+/* Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 30px;
+    background: #151936;
+    border-radius: 6px;
+    min-width: 190px;
+}
+
+.nav-dropdown-content a {
+    display: block;
+    padding: 12px 15px;
+    font-size: 13px;
+    color: #cfd2ff;
+}
+
+.nav-dropdown-content a:hover,
+.nav-dropdown-content a.active {
+    background: #1f2458;
+    color: #ffffff;
+}
+
+.nav-dropdown:hover .nav-dropdown-content {
+    display: block;
+}
+
         body {
             background: #0b0d14;
             color: #ffffff;
@@ -75,6 +162,22 @@
         }
     </style>
 </head>
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-brand">MODULO</div>
+
+    <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+
+        <div class="nav-dropdown">
+            <span class="nav-link nav-dropbtn active">Tools</span>
+            <div class="nav-dropdown-content">
+                <a href="hash-generator.html" class="active">Hash Generator</a>
+                <a href="dictionary-attack.html">Dictionary Attack</a>
+            </div>
+        </div>
+    </nav>
+</header>
 
 <body>
     <div class="container">
