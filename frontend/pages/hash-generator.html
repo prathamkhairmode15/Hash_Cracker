@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hash Generator | Cyber Astra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="../js/hashGenerator.js"></script>
+
+    <style>
+        body {
+            background: #0b0d14;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            padding: 60px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #b5b8ff;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: #151936;
+            border: 1px solid #2a2f6b;
+            color: #fff;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 14px 30px;
+            background: #6c7cff;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5867e0;
+        }
+
+        .result {
+            margin-top: 40px;
+            padding: 20px;
+            background: #151936;
+            border-radius: 6px;
+            word-break: break-all;
+            display: none;
+        }
+
+        .result span {
+            color: #9aa0ff;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Hash Generator</h1>
+        <p>Generate cryptographic hashes using common algorithms.</p>
+
+        <label for="inputText">Input Text</label>
+        <textarea id="inputText" rows="4" placeholder="Enter text to hash..."></textarea>
+
+        <label for="algorithm">Hash Algorithm</label>
+        <select id="algorithm">
+            <option value="MD5">MD5</option>
+            <option value="SHA-1">SHA-1</option>
+            <option value="SHA-256">SHA-256</option>
+        </select>
+
+        <button onclick="generateHash()">Generate Hash</button>
+
+        <div class="result" id="resultBox">
+            <span id="algoUsed"></span>
+            <p id="hashOutput"></p>
+        </div>
+    </div>
+
+    <script src="../js/hashGenerator.js"></script>
+</body>
+</html>
