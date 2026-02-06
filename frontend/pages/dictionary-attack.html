@@ -317,10 +317,12 @@
         `;
 
             // Dynamic Backend URL Selection
-            const isProduction = window.location.hostname === 'hashcracker.up.railway.app';
-            const BACKEND_URL = isProduction
-                ? "https://hashcracker.up.railway.app"
-                : `${window.location.protocol}//${window.location.hostname}:5000`;
+            const hostname = window.location.hostname;
+            const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
+
+            const BACKEND_URL = isLocal
+                ? `${window.location.protocol}//${window.location.hostname}:5000`
+                : "https://hashcracker.up.railway.app";
 
             console.log("Using Backend:", BACKEND_URL);
 
