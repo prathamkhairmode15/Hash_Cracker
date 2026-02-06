@@ -2,11 +2,383 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Dictionary Attack | MODULO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dictionary Attack | Cyber Astra</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* -------- NAVBAR -------- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #0b0d14;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 60px;
+            border-bottom: 1px solid #1a1d3a;
+        }
+
+        .nav-brand {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            position: relative;
+            margin-left: 30px;
+            font-size: 14px;
+            color: #cfd2ff;
+            cursor: pointer;
+            padding-bottom: 6px;
+            text-decoration: none;
+        }
+
+        /* Underline animation */
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background: #6c7cff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #ffffff;
+        }
+
+        /* Dropdown */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 30px;
+            background: #151936;
+            border-radius: 6px;
+            min-width: 190px;
+        }
+
+        .nav-dropdown-content a {
+            display: block;
+            padding: 12px 15px;
+            font-size: 13px;
+            color: #cfd2ff;
+            text-decoration: none;
+        }
+
+        .nav-dropdown-content a:hover,
+        .nav-dropdown-content a.active {
+            background: #1f2458;
+            color: #ffffff;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: block;
+        }
+
+        /* -------- MAIN BODY -------- */
+        body {
+            background: #0b0d14;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .content-wrapper {
+            padding: 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            color: #b5b8ff;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #9aa0ff;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            background: #151936;
+            border: 1px solid #2a2f6b;
+            color: #fff;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box; 
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #6c7cff;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 14px 30px;
+            background: #6c7cff;
+            border: none;
+            color: #fff;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #5867e0;
+        }
+
+        button:disabled {
+            background: #4a548f;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* -------- RESULTS -------- */
+        .result-box {
+            margin-top: 40px;
+            padding: 24px;
+            background: #151936;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border-left: 5px solid #6c7cff;
+        }
+
+        .result-header {
+            font-size: 13px;
+            color: #9aa0ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .result-content {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .success {
+            border-left-color: #00e676; /* Green for success */
+        }
+
+        .success .result-header {
+            color: #00e676;
+        }
+
+        .failure {
+            border-left-color: #ff5252; /* Red for failure */
+        }
+
+        .failure .result-header {
+            color: #ff5252;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #2a2f6b;
+            font-size: 14px;
+            color: #cfd2ff;
+        }
+
+        .highlight-pass {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace; /* Monospace for password */
+            background: #0b0d14;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+    </style>
 </head>
+
 <body>
-    <h1>Dictionary Attack</h1>
-    <p>Will arrive soon ....</p>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../index.html" class="nav-brand" style="text-decoration:none; color:white;">MODULO</a>
+
+        <nav class="nav-links">
+            <a href="../index.html" class="nav-link">Home</a>
+
+            <div class="nav-dropdown">
+                <span class="nav-link nav-dropbtn active">Tools</span>
+                <div class="nav-dropdown-content">
+                    <a href="hash-generator.html">Hash Generator</a>
+                    <a href="dictionary-attack.html" class="active">Dictionary Attack</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-wrapper">
+        <div class="container">
+            <h1>Dictionary Attack</h1>
+            <p class="subtitle">Attempt to crack hashes using a pre-computed wordlist.</p>
+
+            <!-- FORM -->
+            <label for="hashInput">Target Hash</label>
+            <input type="text" id="hashInput" placeholder="e.g. 5f4dcc3b5aa765d61d8327deb882cf99" />
+
+            <label for="algorithm">Algorithm</label>
+            <select id="algorithm">
+                <option value="MD5">MD5</option>
+                <option value="SHA-1">SHA-1</option>
+                <option value="SHA-256">SHA-256</option>
+            </select>
+
+            <button id="attackBtn" onclick="startAttack()">Start Attack</button>
+
+            <!-- RESULT DISPLAY -->
+            <div id="resultBox" class="result-box">
+                <!-- Content injected by JS -->
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    async function startAttack() {
+        const hashInput = document.getElementById("hashInput");
+        const algorithm = document.getElementById("algorithm");
+        const btn = document.getElementById("attackBtn");
+        const resultBox = document.getElementById("resultBox");
+
+        const hash = hashInput.value.trim();
+
+        if (!hash) {
+            alert("Please enter a hash.");
+            return;
+        }
+
+        // UI Loading State
+        btn.disabled = true;
+        btn.innerText = "Cracking...";
+        btn.style.opacity = "0.7";
+        
+        resultBox.style.display = "block";
+        resultBox.className = "result-box"; // Reset classes
+        resultBox.innerHTML = `
+            <div class="result-header">Status</div>
+            <div class="result-content">Running dictionary attack... please wait.</div>
+        `;
+
+        try {
+            const response = await fetch("http://127.0.0.1:5000/api/dictionary-attack", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    hash: hash,
+                    algorithm: algorithm.value
+                })
+            });
+
+            const data = await response.json();
+
+            // Render Output based on Status
+            if (data.status === "success") {
+                resultBox.className = "result-box success";
+                resultBox.innerHTML = `
+                    <div class="result-header">Attack Successful</div>
+                    <div class="result-content">
+                        Password found:
+                        <br>
+                        <span class="highlight-pass">${data.password}</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Time: ${data.time}s</span>
+                        <span>Attempts: ${data.attempts}</span>
+                    </div>
+                `;
+            } else if (data.status === "failed") {
+                 resultBox.className = "result-box failure";
+                 resultBox.innerHTML = `
+                    <div class="result-header">Attack Failed</div>
+                    <div class="result-content">
+                        ${data.message || "Password not found in the provided wordlist."}
+                    </div>
+                    <div class="stat-row">
+                        <span>Time: ${data.time}s</span>
+                        <span>Attempts: ${data.attempts}</span>
+                    </div>
+                `;
+            } else {
+                // Error or other status
+                 resultBox.className = "result-box failure";
+                 resultBox.innerHTML = `
+                    <div class="result-header">Error</div>
+                    <div class="result-content">
+                        ${data.message || "An unknown error occurred."}
+                    </div>
+                `;
+            }
+
+        } catch (error) {
+            console.error(error);
+            resultBox.className = "result-box failure";
+            resultBox.innerHTML = `
+                <div class="result-header">Connection Error</div>
+                <div class="result-content">
+                    Failed to connect to the backend. Is the server running?
+                </div>
+            `;
+        } finally {
+            // Restore Button
+            btn.disabled = false;
+            btn.innerText = "Start Attack";
+            btn.style.opacity = "1";
+        }
+    }
+    </script>
+
 </body>
 </html>
