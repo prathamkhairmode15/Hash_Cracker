@@ -316,7 +316,13 @@
             <div class="result-content">Running dictionary attack... please wait.</div>
         `;
 
-            const BACKEND_URL = "https://hashcracker.up.railway.app/"; // Local default. Update this after Railway deployment.
+            // Dynamic Backend URL Selection
+            const isProduction = window.location.hostname === 'hashcracker.up.railway.app';
+            const BACKEND_URL = isProduction
+                ? "https://hashcracker.up.railway.app"
+                : `${window.location.protocol}//${window.location.hostname}:5000`;
+
+            console.log("Using Backend:", BACKEND_URL);
 
             try {
                 const response = await fetch(`${BACKEND_URL}/api/dictionary-attack`, {
@@ -376,7 +382,8 @@
                 resultBox.innerHTML = `
                 <div class="result-header">Connection Error</div>
                 <div class="result-content">
-                    Failed to connect to the backend. Is the server running?
+                    Failed to connect to the backend (${BACKEND_URL}).<br>
+                    Error: ${error.message}
                 </div>
             `;
             } finally {
