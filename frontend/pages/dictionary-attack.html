@@ -395,6 +395,62 @@
                 btn.style.opacity = "1";
             }
         }
+
+        // Backend Wake-up / Ping Mechanism for Railway Cold Starts
+        async function wakeUpBackend(url) {
+            const statusDiv = document.createElement("div");
+            statusDiv.style.position = "fixed";
+            statusDiv.style.bottom = "20px";
+            statusDiv.style.right = "20px";
+            statusDiv.style.padding = "10px 20px";
+            statusDiv.style.background = "#2a2f6b";
+            statusDiv.style.color = "#cfd2ff";
+            statusDiv.style.borderRadius = "5px";
+            statusDiv.style.fontSize = "12px";
+            statusDiv.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
+            statusDiv.id = "backend-status";
+            statusDiv.innerHTML = "Connecting to backend...";
+            document.body.appendChild(statusDiv);
+
+            try {
+                // Determine URL if not passed (though we usually have it in local scope,
+                // we'll recalculate to be safe or pass it in).
+                // Re-using logic for consistency:
+                const hostname = window.location.hostname;
+                const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
+                const targetUrl = url || (isLocal
+                    ? `${window.location.protocol}//${window.location.hostname}:5000`
+                    : "https://hashcracker.up.railway.app");
+
+                const response = await fetch(targetUrl);
+                if (response.ok) {
+                    statusDiv.innerHTML = "● Backend Connected";
+                    statusDiv.style.color = "#00e676";
+                    setTimeout(() => {
+                        statusDiv.style.opacity = "0";
+                        setTimeout(() => statusDiv.remove(), 1000);
+                    }, 3000);
+                } else {
+                    throw new Error("Backend reachable but returned error");
+                }
+            } catch (e) {
+                console.warn("Backend wake-up failed or timed out:", e);
+                statusDiv.innerHTML = "● Backend Sleeping / Unreachable";
+                statusDiv.style.color = "#ff5252";
+            }
+        }
+
+        // Initialize Wake Up on Load
+        document.addEventListener("DOMContentLoaded", () => {
+            // Calculate URL again for the init call
+            const hostname = window.location.hostname;
+            const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
+            const BACKEND_URL = isLocal
+                ? `${window.location.protocol}//${window.location.hostname}:5000`
+                : "https://hashcracker.up.railway.app";
+
+            wakeUpBackend(BACKEND_URL);
+        });
     </script>
 
 </body>
