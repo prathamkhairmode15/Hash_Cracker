@@ -435,8 +435,9 @@
                 }
             } catch (e) {
                 console.warn("Backend wake-up failed or timed out:", e);
-                statusDiv.innerHTML = "● Backend Sleeping / Unreachable";
+                statusDiv.innerHTML = `● Connection Failed<br><span style="font-size:10px; opacity:0.8">${targetUrl}<br>${e.message}</span>`;
                 statusDiv.style.color = "#ff5252";
+                // Keep it visible for debugging
             }
         }
 
