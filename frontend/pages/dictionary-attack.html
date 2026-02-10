@@ -75,9 +75,13 @@
             display: none;
             position: absolute;
             top: 30px;
+            right: 0;
+            /* Align to right on desktop */
             background: #151936;
             border-radius: 6px;
             min-width: 190px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
         }
 
         .nav-dropdown-content a {
@@ -105,26 +109,36 @@
             font-family: 'Poppins', sans-serif;
             padding: 0;
             margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .content-wrapper {
-            padding: 60px;
+            padding: 60px 20px;
+            /* Reduced side padding for responsiveness */
             display: flex;
             justify-content: center;
+            flex: 1;
+            /* Push footer down */
         }
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 600px;
+            /* Slightly narrower for better focus */
         }
 
         h1 {
             margin-bottom: 10px;
+            font-size: 32px;
+            /* Explicit size */
         }
 
         p.subtitle {
             color: #b5b8ff;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            line-height: 1.6;
         }
 
         label {
@@ -133,47 +147,63 @@
             margin-bottom: 8px;
             font-size: 14px;
             color: #9aa0ff;
+            font-weight: 500;
         }
 
         input[type="text"],
         select {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
+            /* Larger touch target */
             background: #151936;
             border: 1px solid #2a2f6b;
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
+            /* Softer corners */
             font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            /* Readable on mobile */
             box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         input[type="text"]:focus,
         select:focus {
             outline: none;
             border-color: #6c7cff;
+            box-shadow: 0 0 0 3px rgba(108, 124, 255, 0.2);
         }
 
         button {
-            margin-top: 25px;
-            padding: 14px 30px;
+            width: 100%;
+            /* Full width button matches inputs */
+            margin-top: 30px;
+            padding: 16px;
             background: #6c7cff;
             border: none;
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
 
         button:hover {
             background: #5867e0;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(1px);
         }
 
         button:disabled {
             background: #4a548f;
             cursor: not-allowed;
             opacity: 0.7;
+            transform: none;
         }
 
         /* -------- RESULTS -------- */
@@ -181,30 +211,43 @@
             margin-top: 40px;
             padding: 24px;
             background: #151936;
-            border-radius: 8px;
+            border-radius: 12px;
             display: none;
-            /* Hidden by default */
             border-left: 5px solid #6c7cff;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .result-header {
-            font-size: 13px;
+            font-size: 12px;
             color: #9aa0ff;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
         .result-content {
             font-size: 16px;
             color: #ffffff;
             line-height: 1.6;
+            word-break: break-all;
+            /* Important for long hashes */
         }
 
         .success {
             border-left-color: #00e676;
-            /* Green for success */
         }
 
         .success .result-header {
@@ -213,7 +256,6 @@
 
         .failure {
             border-left-color: #ff5252;
-            /* Red for failure */
         }
 
         .failure .result-header {
@@ -236,11 +278,92 @@
             color: #ffffff;
             margin: 10px 0;
             font-family: 'Courier New', monospace;
-            /* Monospace for password */
             background: #0b0d14;
-            padding: 8px 12px;
-            border-radius: 4px;
+            padding: 12px 16px;
+            border-radius: 6px;
             display: inline-block;
+            width: 100%;
+            /* Full width on mobile */
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid #2a2f6b;
+        }
+
+        /* -------- RESPONSIVE DESIGN -------- */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-brand {
+                margin-bottom: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+                /* Spread links out */
+                overflow-x: auto;
+                /* Allow scrolling if too many */
+            }
+
+            .nav-link {
+                margin-left: 0;
+                margin-right: 20px;
+                font-size: 13px;
+                white-space: nowrap;
+            }
+
+            .nav-dropdown-content {
+                left: 0;
+                /* Align left */
+                right: auto;
+                top: 35px;
+            }
+
+            .content-wrapper {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .stat-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        /* -------- TOAST -------- */
+        #backend-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            background: #151936;
+            color: #cfd2ff;
+            border-radius: 8px;
+            font-size: 13px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            z-index: 2000;
+            border: 1px solid #2a2f6b;
+            transition: opacity 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            #backend-status {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                justify-content: center;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -402,36 +525,30 @@
             }
         }
 
-        // Backend Wake-up / Ping Mechanism for Railway Cold Starts
+        // Backend Wake-up / Ping Mechanism
         async function wakeUpBackend(url) {
+            // Remove existing if any
+            const existing = document.getElementById("backend-status");
+            if (existing) existing.remove();
+
             const statusDiv = document.createElement("div");
-            statusDiv.style.position = "fixed";
-            statusDiv.style.bottom = "20px";
-            statusDiv.style.right = "20px";
-            statusDiv.style.padding = "10px 20px";
-            statusDiv.style.background = "#2a2f6b";
-            statusDiv.style.color = "#cfd2ff";
-            statusDiv.style.borderRadius = "5px";
-            statusDiv.style.fontSize = "12px";
-            statusDiv.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
             statusDiv.id = "backend-status";
-            statusDiv.innerHTML = "Connecting to backend...";
+            statusDiv.innerHTML = '<span style="color:#ffd700">●</span> Connecting to backend...';
             document.body.appendChild(statusDiv);
 
             try {
-                // Determine URL if not passed (though we usually have it in local scope,
-                // we'll recalculate to be safe or pass it in).
+                // Determine URL if not passed
                 // Re-using logic for consistency:
                 const hostname = window.location.hostname;
                 const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
-                const targetUrl = url || (isLocal
-                    ? `${window.location.protocol}//${window.location.hostname}:5000`
-                    : "https://hashcracker.up.railway.app");
+
+                // Redundant check if url is passed, but safe
+                const targetUrl = url;
 
                 const response = await fetch(targetUrl);
                 if (response.ok) {
-                    statusDiv.innerHTML = "● Backend Connected";
-                    statusDiv.style.color = "#00e676";
+                    statusDiv.innerHTML = '<span style="color:#00e676">●</span> Backend Connected';
+                    statusDiv.style.borderColor = "#00e676";
                     setTimeout(() => {
                         statusDiv.style.opacity = "0";
                         setTimeout(() => statusDiv.remove(), 1000);
@@ -441,23 +558,34 @@
                 }
             } catch (e) {
                 console.warn("Backend wake-up failed or timed out:", e);
-                statusDiv.innerHTML = `● Connection Failed<br><span style="font-size:10px; opacity:0.8">${targetUrl}<br>${e.message}</span>`;
-                statusDiv.style.color = "#ff5252";
-                // Keep it visible for debugging
+                statusDiv.innerHTML = `<span style="color:#ff5252">●</span> Connection Failed`;
+                statusDiv.style.borderColor = "#ff5252";
+                // Add click listener to show details
+                statusDiv.style.cursor = "pointer";
+                statusDiv.title = "Click for details";
+                statusDiv.onclick = () => alert(`Failed to connect to: ${url}\nError: ${e.message}`);
             }
         }
 
         // Initialize Wake Up on Load
+        // Initialize Wake Up on Load
         document.addEventListener("DOMContentLoaded", () => {
-            // Calculate URL again for the init call
+            // Dynamic Backend URL Selection (Must match main logic)
             const hostname = window.location.hostname;
             const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
-            const BACKEND_URL = isLocal
+            const urlParams = new URLSearchParams(window.location.search);
+            const customBackend = urlParams.get('backend');
+
+            // Set your Render Backend URL here once deployed
+            const PRODUCTION_BACKEND = "https://hash-cracker-2.onrender.com";
+
+            const BACKEND_URL = customBackend || (isLocal
                 ? `${window.location.protocol}//${window.location.hostname}:5000`
-                : "https://hashcracker.up.railway.app";
+                : PRODUCTION_BACKEND);
 
             wakeUpBackend(BACKEND_URL);
         });
+
     </script>
 
 </body>
